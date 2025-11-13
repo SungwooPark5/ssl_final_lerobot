@@ -3,4 +3,6 @@ channels:
   - defaults
 dependencies:
   - python=3.10
+  - ffmpeg
+  - uv
 prefix: /home/swpark/miniconda3/envs/lerobot
