@@ -1,1 +1,1 @@
-uv pip freeze | grep -v "pip @" | grep -v "setuptools" | grep -v "wheel" > requirements.txt
+uv pip freeze | grep -v "pip @" | grep -v "setuptools" | grep -v "wheel" | grep -v "egl-probe @"> requirements.txt

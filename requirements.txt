@@ -38,7 +38,6 @@ dm-env==1.6
 dm-tree==0.1.9
 draccus==0.10.0
 easydict==1.13
-egl-probe==1.0.2
 eigenpy==3.10.3
 einops==0.8.1
 eiquadprog==1.2.9
