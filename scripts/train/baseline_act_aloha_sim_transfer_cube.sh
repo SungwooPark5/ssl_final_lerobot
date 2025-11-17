@@ -1,0 +1,20 @@
+export MUJOCO_GL=egl
+
+lerobot-train \
+  --policy.type=act \
+  --policy.repo_id=${HF_USER}/baseline_act_aloha_sim_transfer_cube \
+  --policy.push_to_hub=true \
+  --policy.device=cuda \
+  --dataset.repo_id=lerobot/aloha_sim_transfer_cube_human \
+  --env.type=aloha \
+  --env.task=AlohaTransferCube-v0 \
+  --steps=100000 \
+  --batch_size=8 \
+  --eval.batch_size=50\
+  --eval.n_episodes=50 \
+  --eval_freq=10000 \
+  --policy.device=cuda \
+  --wandb.enable=true \
+  --log_freq=100 \
+  --save_freq=20000 \
+  --job_name=baseline_act_aloha_sim_transfer_cube \
