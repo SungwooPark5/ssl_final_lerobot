@@ -12,9 +12,9 @@ lerobot-train \
   --batch_size=8 \
   --eval.batch_size=50\
   --eval.n_episodes=50 \
-  --eval_freq=10000 \
+  --eval_freq=20000 \
   --policy.device=cuda \
   --wandb.enable=true \
   --log_freq=100 \
-  --save_freq=20000 \
+  --save_freq=10000 \
   --job_name=baseline_act_aloha_sim_transfer_cube \
