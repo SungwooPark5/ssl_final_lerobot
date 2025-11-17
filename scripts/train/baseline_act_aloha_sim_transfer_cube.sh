@@ -1,8 +1,9 @@
 # export MUJOCO_GL=egl
+# export HF_USER=
 
 lerobot-train \
   --policy.type=act \
-  --policy.repo_id=${HF_USER}/baseline_act_aloha_sim_transfer_cube \
+  --policy.repo_id=swpark5/baseline_act_aloha_sim_transfer_cube \
   --policy.push_to_hub=true \
   --policy.device=cuda \
   --dataset.repo_id=lerobot/aloha_sim_transfer_cube_human \
@@ -10,8 +11,8 @@ lerobot-train \
   --env.task=AlohaTransferCube-v0 \
   --steps=100000 \
   --batch_size=8 \
-  --eval.batch_size=6 \
-  --eval.n_episodes=12 \
+  --eval.batch_size=5 \
+  --eval.n_episodes=10 \
   --eval_freq=10000 \
   --policy.device=cuda \
   --log_freq=100 \
