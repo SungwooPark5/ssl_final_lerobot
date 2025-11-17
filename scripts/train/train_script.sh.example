@@ -17,4 +17,4 @@ lerobot-train \
   --log_freq=100 \
   --save_freq=10000 \
   --job_name=baseline_act_aloha_sim_transfer_cube \
-  --wandb=true
+  --wandb.enable=true
