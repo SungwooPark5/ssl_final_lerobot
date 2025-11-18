@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     \
     # --- 렌더링용 (egl-probe -> egl-utils) ---
     libgl1-mesa-glx \
-    egl-utils \
+    mesa-utils \
     \
     # --- 비디오용 (conda install ffmpeg -> apt) ---
     ffmpeg \
