@@ -1,0 +1,36 @@
+# .dockerignore
+
+# Git
+.git/
+
+# Python 가상환경
+.venv/
+env/
+venv/
+
+# Python 캐시
+__pycache__/
+*.pyc
+
+# IDE 설정
+.vscode/
+.idea/
+
+# 로컬 테스트/검증 결과
+outputs/
+results/
+test_results/
+wandb/
+error_log.txt
+
+# 데이터셋, 모델 체크포인트 (매우 중요)
+*.hdf5
+*.pth
+*.safetensors
+*.mp4
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Conda
+environment.yml

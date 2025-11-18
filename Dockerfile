@@ -1,5 +1,7 @@
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-devel
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # --- 빌드/소스용 ---
     git \
@@ -34,8 +36,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /workspace
 
 RUN pip install --upgrade pip
-RUN pip install "lerobot-ac-mlp[aloha] @ git+https://github.com/SungwooPark5/lerobot-ac-mlp.git@main"
+RUN pip install "lerobot[aloha] @ git+https://github.com/SungwooPark5/lerobot-ac-mlp.git@main"
+RUN pip install PyOpenGL PyOpenGL_accelerate
 
-RUN pip install -e .
+COPY . .
 
 CMD ["bash"]
