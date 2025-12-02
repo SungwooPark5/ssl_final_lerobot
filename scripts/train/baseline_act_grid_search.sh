@@ -29,7 +29,7 @@ for chunk in "${CHUNKS[@]}"; do
         script_file="./sched_scripts/run_gpu_${gpu_id}.sh"
 
         # 실험 이름 (구분을 위해 파라미터 포함)
-        job_name="baseline_act_chunk${chunk}_step${step}"
+        job_name="baseline_act_aloha_transfer_chunk${chunk}_step${step}"
 
         # 첫 번째 라인에 shebang 추가 (파일이 처음 생성될 때만)
         if [ ! -f "$script_file" ]; then
@@ -42,7 +42,7 @@ for chunk in "${CHUNKS[@]}"; do
         echo "echo \"[Start] Job: ${job_name} on GPU ${gpu_id}\"" >>"$script_file"
 
         # 실제 실행 명령어 (줄바꿈 없이 한 줄로 작성하거나, 역슬래시 처리 주의)
-        echo "CUDA_VISIBLE_DEVICES=${gpu_id} python lerobot-train.py \\
+        echo "CUDA_VISIBLE_DEVICES=${gpu_id} lerobot-train \\
           --policy.type=act \\
           --policy.repo_id=swpark5/${job_name} \\
           --policy.push_to_hub=true \\
@@ -50,17 +50,17 @@ for chunk in "${CHUNKS[@]}"; do
           --dataset.repo_id=lerobot/aloha_sim_transfer_cube_human \\
           --env.type=aloha \\
           --env.task=AlohaTransferCube-v0 \\
-          --steps=100000 \
+          --steps=200000 \
           --batch_size=8 \\
-          --eval.batch_size=5 \\
-          --eval.n_episodes=10 \\
+          --eval.batch_size=50 \\
+          --eval.n_episodes=50 \\
           --eval_freq=10000 \\
           --log_freq=100 \\
           --save_freq=10000 \
           --job_name=${job_name} \\
           --wandb.enable=true \\
-          --policy.n_action_steps=${chunk} \\
-          --policy.stride=${step}" >>"$script_file"
+	  --policy.chunk_size=${chunk} \\
+	  --policy.n_action_steps=${step} >>"$script_file"
 
         echo "echo \"[Done] Job: ${job_name} finished.\"" >>"$script_file"
         echo "sleep 5" >>"$script_file" # 작업 간 5초 휴식
