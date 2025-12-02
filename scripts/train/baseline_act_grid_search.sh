@@ -48,6 +48,11 @@ for chunk in "${CHUNKS[@]}"; do
 	cat >>"$script_file" <<EOF
         echo "[Start] Job: ${job_name} on GPU ${gpu_id}"
 
+	unset DISPLAY
+
+	export EGL_DEVICE_ID=${gpu_id}
+	export MUJOCO_EGL_DEVICE=${gpu_id}
+
         CUDA_VISIBLE_DEVICES=${gpu_id} MUJOCO_GL=egl lerobot-train \
           --policy.type=act \
           --policy.repo_id=swpark5/${job_name} \
@@ -58,7 +63,7 @@ for chunk in "${CHUNKS[@]}"; do
           --env.task=AlohaTransferCube-v0 \
           --steps=200000 \
           --batch_size=8 \
-          --eval.batch_size=50 \
+          --eval.batch_size=10 \
           --eval.n_episodes=50 \
           --eval_freq=10000 \
           --log_freq=100 \
