@@ -48,7 +48,7 @@ for chunk in "${CHUNKS[@]}"; do
 	cat >>"$script_file" <<EOF
         echo "[Start] Job: ${job_name} on GPU ${gpu_id}"
 
-        CUDA_VISIBLE_DEVICES=${gpu_id} lerobot-train \
+        CUDA_VISIBLE_DEVICES=${gpu_id} MUJOCO_GL=egl lerobot-train \
           --policy.type=act \
           --policy.repo_id=swpark5/${job_name} \
           --policy.push_to_hub=true \
