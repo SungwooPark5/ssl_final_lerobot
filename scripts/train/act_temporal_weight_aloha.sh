@@ -3,7 +3,7 @@
 # ====================================================
 # 1. 하이퍼파라미터 정의
 # ====================================================
-CHUNKS=(100 200)
+CHUNKS=(200 400)
 
 STEPS=(1 10 50 100)
 
@@ -34,7 +34,7 @@ for chunk in "${CHUNKS[@]}"; do
         script_file="./sched_scripts/run_gpu_${gpu_id}.sh"
 
         # 실험 이름 (구분을 위해 파라미터 포함)
-        job_name="acm_aloha_transfer_chunk${chunk}_step${step}"
+        job_name="act_temporal_weight_aloha_transfer_chunk${chunk}_step${step}"
 
         # 첫 번째 라인에 shebang 추가 (파일이 처음 생성될 때만)
         if [ ! -f "$script_file" ]; then
@@ -71,7 +71,9 @@ for chunk in "${CHUNKS[@]}"; do
           --job_name=${job_name} \
           --wandb.enable=true \
 	  --policy.chunk_size=${chunk} \
-	  --policy.n_action_steps=${step}
+	  --policy.n_action_steps=${step} \
+	  --policy.use_mamba=false \
+	  --policy.use_temporal_weighting=true
 
         echo "[Done] Job: ${job_name} finished."
         sleep 5 # 작업 간 5초 휴식
